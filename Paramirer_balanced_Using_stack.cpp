@@ -48,6 +48,10 @@ bool check_balance(string s)
            
         }
     }
+    if (!element.empty())
+    {
+        return false;
+    }
    return true;
 }
 
