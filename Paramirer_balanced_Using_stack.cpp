@@ -45,14 +45,9 @@ bool check_balance(string s)
                 }
                 break;
             }
-           
         }
     }
-    if (!element.empty())
-    {
-        return false;
-    }
-   return true;
+   return element.empty();
 }
 
 int main()
