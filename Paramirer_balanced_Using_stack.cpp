@@ -3,51 +3,67 @@ using namespace std;
 
 bool check_balance(string s)
 {
-    stack<char> element;
-    for (int i = 0; i < s.length(); i++)
-    {
-        if (s[i] == '(' || s[i] == '{' || s[i] == '[')
+    stack<char> data;
+        for (int i = 0; i < s.length(); i++)
         {
-            element.push(s[i]);
-        }
-        else 
-        {
-            switch (s[i])
+            if (s[i] == '(' || s[i] == '{' || s[i] == '[')
             {
-            case ']':
-                if (element.top() == '[')
+                data.push(s[i]);
+            }
+            else 
+            {
+                switch (s[i])
                 {
-                    element.pop();
+                case ')':
+                    if (data.empty())
+                    {
+                        return false;
+                    }
+                    if (data.top() == '(')
+                    {
+                        data.pop();
+                    }
+                    else 
+                    {
+                        return false;
+                    }
+                    break;
+                case '}':
+                    if (data.empty())
+                    {
+                        return false;
+                    }
+                    if (data.top() == '{')
+                    {
+                        data.pop();
+                    }
+                    else 
+                    {
+                        return false;
+                    }
+                    break;
+                case ']':
+                    if (data.empty())
+                    {
+                        return false;
+                    }
+                    if (data.top() == '[')
+                    {
+                        data.pop();
+                    }
+                    else 
+                    {
+                        return false;
+                    }
+                    break;
                 }
-                else 
-                {
-                    return false;
-                }
-                break;
-            case '}':
-                if (element.top() == '{')
-                {
-                    element.pop();
-                }
-                else 
-                {
-                    return false;
-                }
-                break;
-            case ')':
-                if (element.top() == '(')
-                {
-                    element.pop();
-                }
-                else 
-                {
-                    return false;
-                }
-                break;
             }
         }
-    }
-   return element.empty();
+        if (data.empty())
+        {
+            return true;
+        }
+        return false;
 }
 
 int main()
